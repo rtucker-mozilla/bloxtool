@@ -90,12 +90,20 @@ class APIOutput(object):
         key_counter = 1
         for k in f_keys:
             v = entry[k]
-            translated_key = self._translate_key(k)
-            i_str += "{key}: {value}{delimeter}".format(
-                key=translated_key,
-                value=v,
-                delimeter=delimeter
-            )
+            if k == "extattrs":
+                for extattr in entry[k]:
+                    i_str += "{key}: {value}{delimeter}".format(
+                        key=extattr,
+                        value=entry[k][extattr]['value'],
+                        delimeter=delimeter
+                    )
+            else:
+                translated_key = self._translate_key(k)
+                i_str += "{key}: {value}{delimeter}".format(
+                    key=translated_key,
+                    value=v,
+                    delimeter=delimeter
+                )
         i_str = i_str.rstrip(delimeter)
         if len(i_str) > 0:
             i_str += "\n"

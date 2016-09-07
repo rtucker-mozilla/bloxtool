@@ -12,7 +12,14 @@ class BaseMixin(object):
         self.delimeter = delimeter
         self.api_out = None
 
-    def get_output(self, ret, o_format='text', delimeter=" ", should_return=False):
+    def get_output(
+        self,
+        ret,
+        o_format='text',
+        delimeter=" ",
+        should_return=False,
+        parse_site=False
+    ):
         self.api_out = APIOutput(ret, o_format=o_format, delimeter=delimeter)
         has_error, error_text = self.api_out.process_resp()
         if has_error is True:

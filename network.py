@@ -28,8 +28,10 @@ class Network(BaseMixin):
             print self.get_output(ret, self.o_format, self.delimeter)
 
 
-    def list_networks(self):
+    def list_networks(self, include_extattrs=False):
         url = 'network'
+        if include_extattrs:
+            url = 'network' + '?_return_fields=extattrs'
         ret = self.make_request(
             url,
             'get',

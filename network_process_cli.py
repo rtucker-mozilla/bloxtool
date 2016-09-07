@@ -20,7 +20,7 @@ def network_process_cli(config, auth, opt):
     )
 
     if opt['list'] is True:
-        n.list_networks()
+        n.list_networks(include_extattrs=opt['--extattrs'])
     elif opt['search'] is True:
         n.search(
             name=opt['<name>'],

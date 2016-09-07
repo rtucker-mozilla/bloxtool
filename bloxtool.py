@@ -8,7 +8,7 @@ Usage:
   bloxtool.py fixedaddress delete mac <mac_address> [--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
   bloxtool.py fixedaddress delete address <ipv4addr> [--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
   bloxtool.py fixedaddress option <option> value <value> address <ipv4addr>[--config=~/.bloxtool.cfg][--delimeter=" "][--format=text][--delete]
-  bloxtool.py network list [--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
+  bloxtool.py network list [--config=~/.bloxtool.cfg][--delimeter=" "][--format=text][--extattrs]
   bloxtool.py network fixedaddresses <network> [--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
   bloxtool.py network get <network> [--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
   bloxtool.py network delete <network> [--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
