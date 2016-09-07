@@ -46,23 +46,36 @@ class Network(BaseMixin):
             print "Unable to find fixed address by ip"
             sys.exit(2)
         data = {}
-        options = []
-        options = [{
-                'name': option_name,
-                'value': option_value
-            }]
-        data['options'] = options
-        ret_obj = self.make_request(
-            url,
-            'update',
-            data=data,
+        existing_options = self.make_request(
+            url + "?_return_fields=options",
+            'get',
             hostname=self.hostname,
             auth=self.auth
         )
         try:
+            options = existing_options.json()['options']
+        except (AttributeError, KeyError):
+            options = []
+        options.append({
+                'name': option_name,
+                'value': option_value
+            })
+        data['options'] = options
+        try:
+            ret_obj = self.make_request(
+                url,
+                'update',
+                data=data,
+                hostname=self.hostname,
+                auth=self.auth
+            )
+        except Exception, e:
+            pass
+        try:
             if ret_obj.status_code == 200:
                 print "Successfully created network option"
             else:
+                import pdb; pdb.set_trace()
                 print "Unable to create network option"
                 print ret_obj.json()['text']
         except Exception, e:

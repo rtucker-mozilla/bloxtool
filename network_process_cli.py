@@ -36,12 +36,15 @@ def network_process_cli(config, auth, opt):
         network_block = opt['<network_block>']
         option_name = opt['<option>']
         option_value = opt['<value>']
+        if '\-' in option_value:
+            option_value = option_value.replace('\-', '-')
         n.create_option(network_block, option_name, option_value)
     elif opt['attr'] is True and opt['create']:
         network_block = opt['<network_block>']
         attr_name = opt['<option>']
         attr_value = opt['<value>']
         n.create_attr(network_block, attr_name, attr_value)
+
     elif opt['create'] is True:
         if not opt['range']:
             network = opt['<network>']

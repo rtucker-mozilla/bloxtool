@@ -18,6 +18,9 @@ Usage:
   bloxtool.py network create range name <name> start <start> end <end>[--comment=" "][--disable=True][--config=~/.bloxtool.cfg]
   bloxtool.py network option create <option> value <value> network_block <network_block>[--config=~/.bloxtool.cfg][--delimeter=" "][--format=text][--delete]
   bloxtool.py network attr create <option> value <value> network_block <network_block>[--config=~/.bloxtool.cfg][--delimeter=" "][--format=text][--delete]
+  bloxtool.py networkcontainer create name <name> network <network> [--members=[]][--comment=" "][--disable=True][--config=~/.bloxtool.cfg]
+  bloxtool.py networkcontainer delete <network> [--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
+  bloxtool.py networkcontainer option create <option> value <value> network_block <network_block>[--config=~/.bloxtool.cfg][--delimeter=" "][--format=text][--delete]
   bloxtool.py host search mac <mac_address>[--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
   bloxtool.py host create mac <mac_address> ipv4addrs=<ipv4addrs> name=<name>[--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
   bloxtool.py host list [--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
@@ -32,9 +35,9 @@ from docopt import docopt
 from config import get_config
 from fixedaddress_process_cli import fixedaddress_process_cli
 from network_process_cli import network_process_cli
+from networkcontainer_process_cli import networkcontainer_process_cli
 # from host_process_cli import host_process_cli
 import os
-import sys
 
 
 if __name__ == '__main__':
@@ -47,7 +50,10 @@ if __name__ == '__main__':
     auth = (config.username, config.password,)
     if opt['fixedaddress']:
         fixedaddress_process_cli(config, auth, opt)
-    elif opt['network']:
+    elif opt['network'] and not opt['networkcontainer']:
         network_process_cli(config, auth, opt)
+    elif opt['networkcontainer']:
+        print 'here'
+        networkcontainer_process_cli(config, auth, opt)
 #    elif opt['host']:
 #        host_process_cli(config, auth, opt)
