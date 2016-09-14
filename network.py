@@ -139,6 +139,20 @@ class Network(BaseMixin):
         )
         print self.get_output(ret, self.o_format, self.delimeter)
 
+    def search_by_attribute_value(self, attribute, value, network=None):
+        network_string = ""
+        if network:
+            network_string = "network=%s&" % network
+
+        url = 'network?%s*%s~:=%s' % (network_string, attribute, value)
+        ret = self.make_request(
+            url,
+            'get',
+            hostname=self.hostname,
+            auth=self.auth
+        )
+        print self.get_output(ret, self.o_format, self.delimeter)
+
     def search_by_site(self, site):
         url = 'network?*Site~:=%s' % site
         ret = self.make_request(
@@ -149,11 +163,13 @@ class Network(BaseMixin):
         )
         print self.get_output(ret, self.o_format, self.delimeter)
 
-    def search(self, name=None, site=None):
+    def search(self, name=None, site=None, attribute=None, value=None, network=None):
         if name is not None:
             self.search_by_name(name=name)
         elif site is not None:
             self.search_by_site(site=site)
+        elif attribute and value:
+            self.search_by_attribute_value(attribute, value, network)
 
     def search_by_network_cidr(self, network):
         url = 'network?network~=%s' % network

@@ -25,6 +25,9 @@ def network_process_cli(config, auth, opt):
         n.search(
             name=opt['<name>'],
             site=opt['<site>'],
+            attribute=opt['<attribute>'],
+            value=opt['<value>'],
+            network=opt['--network'],
         )
     elif opt['get'] is True:
         network = opt['<network>']

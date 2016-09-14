@@ -14,6 +14,7 @@ Usage:
   bloxtool.py network delete <network> [--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
   bloxtool.py network search name <name> [--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
   bloxtool.py network search site <site> [--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
+  bloxtool.py network search attribute <attribute> value <value>[--network=""][--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
   bloxtool.py network create name <name> network <network> [--members=[]][--comment=" "][--disable=True][--config=~/.bloxtool.cfg]
   bloxtool.py network create range name <name> start <start> end <end>[--comment=" "][--disable=True][--config=~/.bloxtool.cfg]
   bloxtool.py network option create <option> value <value> network_block <network_block>[--config=~/.bloxtool.cfg][--delimeter=" "][--format=text][--delete]
