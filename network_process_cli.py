@@ -7,8 +7,10 @@ def network_process_cli(config, auth, opt):
     else:
         delimeter = opt['--delimeter']
 
-    if opt['-6'] is False:
-        ipv6 = None
+    if opt['-6'] is None:
+        ipv6 = False
+    elif opt['-6'] is False:
+        ipv6 = False
     else:
         ipv6 = True
 
