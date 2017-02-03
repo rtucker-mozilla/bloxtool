@@ -5,12 +5,21 @@ from apioutput import APIOutput
 
 
 class BaseMixin(object):
-    def __init__(self, hostname, auth, o_format="text", delimeter=" "):
+    def __init__(
+        self,
+        hostname,
+        auth,
+        o_format="text",
+        delimeter=" ",
+        ipv6=False
+    ):
+
         self.hostname = hostname
         self.auth = auth
         self.o_format = o_format
         self.delimeter = delimeter
         self.api_out = None
+        self.ipv6 = ipv6
 
     def get_output(
         self,

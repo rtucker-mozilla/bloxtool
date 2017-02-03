@@ -7,6 +7,11 @@ def network_process_cli(config, auth, opt):
     else:
         delimeter = opt['--delimeter']
 
+    if opt['-6'] is False:
+        ipv6 = None
+    else:
+        ipv6 = True
+
     if opt['--format'] is None:
         o_format = "text"
     else:
@@ -16,11 +21,15 @@ def network_process_cli(config, auth, opt):
         hostname=config.host,
         auth=auth,
         o_format=o_format,
-        delimeter=delimeter
+        delimeter=delimeter,
+        ipv6=ipv6
     )
 
     if opt['list'] is True:
-        n.list_networks(include_extattrs=opt['--extattrs'])
+        n.list_networks(
+            include_extattrs=opt['--extattrs'],
+            ipv6=ipv6
+        )
     elif opt['search'] is True:
         if opt['--network']:
             opt_network = opt['--network']
@@ -31,11 +40,12 @@ def network_process_cli(config, auth, opt):
             site=opt['<site>'],
             attribute=opt['<attribute>'],
             value=opt['<value>'],
-            network=opt_network
+            network=opt_network,
+            ipv6=ipv6
         )
     elif opt['get'] is True:
         network = opt['<network>']
-        n.get(network)
+        n.get(network, ipv6=ipv6)
     elif opt['fixedaddresses'] is True:
         network = opt['<network>']
         n.fixedaddresses(network)
