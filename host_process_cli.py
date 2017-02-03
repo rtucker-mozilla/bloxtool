@@ -23,8 +23,11 @@ def host_process_cli(config, auth, opt):
         n.list_hosts()
     elif opt['search'] is True:
         n.search(
-            name=opt['<name>'],
-            site=opt['<site>'],
+            attribute=opt['<attribute>'],
+            value=opt['<value>'],
+            network=opt['<network>'],
+            stype=opt['--type'],
+            status=opt['--status'],
         )
     elif opt['get'] is True:
         network = opt['<network>']

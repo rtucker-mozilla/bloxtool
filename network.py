@@ -180,6 +180,7 @@ class Network(BaseMixin):
             auth=self.auth
         )
         try:
+            import pdb; pdb.set_trace()
             ref = network_obj.json()[0]['_ref']
         except (IndexError, KeyError):
             return None
