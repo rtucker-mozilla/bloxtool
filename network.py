@@ -33,7 +33,6 @@ class Network(BaseMixin):
         if include_extattrs:
             url = 'network' + '?_return_fields=extattrs'
         if ipv6:
-            print 'here'
             url = "ipv6" + url
         ret = self.make_request(
             url,
