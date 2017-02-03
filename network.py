@@ -147,10 +147,10 @@ class Network(BaseMixin):
         network_string = ""
         if network:
             network_string = "network=%s&" % network
-        if ipv6 is True:
-            network_string = "ipv6network=%s&" % network
 
         url = 'network?%s*%s~:=%s' % (network_string, attribute, value)
+        if ipv6 is True:
+            url = "ipv6%s" % url
         ret = self.make_request(
             url,
             'get',
