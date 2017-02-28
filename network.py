@@ -28,10 +28,12 @@ class Network(BaseMixin):
             print self.get_output(ret, self.o_format, self.delimeter)
 
 
-    def list_networks(self, include_extattrs=False):
+    def list_networks(self, include_extattrs=False, ipv6=False):
         url = 'network'
         if include_extattrs:
             url = 'network' + '?_return_fields=extattrs'
+        if ipv6:
+            url = "ipv6" + url
         ret = self.make_request(
             url,
             'get',
@@ -77,7 +79,6 @@ class Network(BaseMixin):
             if ret_obj.status_code == 200:
                 print "Successfully created network option"
             else:
-                import pdb; pdb.set_trace()
                 print "Unable to create network option"
                 print ret_obj.json()['text']
         except Exception, e:
@@ -90,7 +91,6 @@ class Network(BaseMixin):
             should_return=True,
             attrs="extattrs"
         )
-        import pdb; pdb.set_trace()
         try:
             url = net_obj.json()[0]['_ref']
         except (IndexError, KeyError):
@@ -129,8 +129,11 @@ class Network(BaseMixin):
         )
         print self.get_output(ret, self.o_format, self.delimeter)
 
-    def search_by_name(self, name):
+    def search_by_name(self, name, ipv6=False):
         url = 'network?comment~:=%s' % name
+        if ipv6 is True:
+            url = 'ipv6network?comment~:=%s' % name
+
         ret = self.make_request(
             url,
             'get',
@@ -139,12 +142,14 @@ class Network(BaseMixin):
         )
         print self.get_output(ret, self.o_format, self.delimeter)
 
-    def search_by_attribute_value(self, attribute, value, network=None):
+    def search_by_attribute_value(self, attribute, value, network=None, ipv6=False):
         network_string = ""
         if network:
             network_string = "network=%s&" % network
 
         url = 'network?%s*%s~:=%s' % (network_string, attribute, value)
+        if ipv6 is True:
+            url = "ipv6%s" % url
         ret = self.make_request(
             url,
             'get',
@@ -153,8 +158,10 @@ class Network(BaseMixin):
         )
         print self.get_output(ret, self.o_format, self.delimeter)
 
-    def search_by_site(self, site):
+    def search_by_site(self, site, ipv6=False):
         url = 'network?*Site~:=%s' % site
+        if ipv6 is True:
+            url = 'ipv6network?*Site~:=%s' % site
         ret = self.make_request(
             url,
             'get',
@@ -163,16 +170,18 @@ class Network(BaseMixin):
         )
         print self.get_output(ret, self.o_format, self.delimeter)
 
-    def search(self, name=None, site=None, attribute=None, value=None, network=None):
+    def search(self, name=None, site=None, attribute=None, value=None, network=None, ipv6=False):
         if name is not None:
-            self.search_by_name(name=name)
+            self.search_by_name(name=name, ipv6=ipv6)
         elif site is not None:
-            self.search_by_site(site=site)
+            self.search_by_site(site=site, ipv6=ipv6)
         elif attribute and value:
-            self.search_by_attribute_value(attribute, value, network)
+            self.search_by_attribute_value(attribute, value, network, ipv6=ipv6)
 
-    def search_by_network_cidr(self, network):
+    def search_by_network_cidr(self, network, ipv6=False):
         url = 'network?network~=%s' % network
+        if ipv6 is True:
+            url = 'ipv6network?network~=%s' % network
         network_obj = self.make_request(
             url,
             'get',
@@ -180,7 +189,6 @@ class Network(BaseMixin):
             auth=self.auth
         )
         try:
-            import pdb; pdb.set_trace()
             ref = network_obj.json()[0]['_ref']
         except (IndexError, KeyError):
             return None
@@ -191,9 +199,10 @@ class Network(BaseMixin):
             auth=self.auth
         )
 
-    def get(self, network):
+    def get(self, network, ipv6=False):
         ret = self.search_by_network_cidr(
             network=network,
+            ipv6=ipv6
         )
         if ret is None:
             print "Unable to get Nework: {network}".format(
@@ -218,7 +227,7 @@ class Network(BaseMixin):
             print 'No Networks Found'
         print self.get_output(ret, self.o_format, self.delimeter)
 
-    def delete_network(self, network):
+    def delete_network(self, network, ipv6=False):
         try:
             network_req = self.search_by_network_cidr(
                 network=network,
