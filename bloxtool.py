@@ -25,7 +25,7 @@ Usage:
   bloxtool.py host search mac <mac_address>[--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
   bloxtool.py host search network <network>[--type=''][--status=''][--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
   bloxtool.py host search attribute <attribute> value <value> network <network>[--type=''][--status=''][--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
-  bloxtool.py host create mac <mac_address> ipv4addrs=<ipv4addrs> name=<name>[--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
+  bloxtool.py host create mac <mac_address> ipv4addrs <ipv4addrs> name <name>[--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
   bloxtool.py host list [--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
 
   bloxtool.py member list [--config=~/.bloxtool.cfg]

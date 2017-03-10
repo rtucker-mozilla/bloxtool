@@ -1,3 +1,8 @@
+from common import make_request
+import json
+import yaml
+import sys
+from apioutput import APIOutput
 from basemixin import BaseMixin
 
 
@@ -69,3 +74,59 @@ class Host(BaseMixin):
             auth=self.auth
         )
         print self.get_output(ret, self.o_format, self.delimeter)
+
+    def create_host(
+            self,
+            name,
+            ipv4addrs,
+            mac,
+            should_print=False):
+        url = "record:host"
+        data = {}
+        addrobj = {}
+        addrobj['ipv4addr'] = "10.48.8.43"
+        if mac:
+            addrobj['mac'] = mac
+        data['ipv4addrs'] = [addrobj]
+        data['name'] = name
+        addrobj['ipv4addr'] = ipv4addrs
+        data['view'] = "MDC1 Private"
+        ret = make_request(
+            url,
+            'create',
+            data=data,
+            hostname=self.hostname,
+            auth=self.auth
+        )
+        output = self.get_output(ret, self.o_format, self.delimeter)
+        if should_print is True:
+            print output
+
+    def search_by_record_name(self, name, should_return=False):
+        url = 'record:host?name=%s' % name
+        ret = self.make_request(
+            url,
+            'get',
+            hostname=self.hostname,
+            auth=self.auth
+        )
+        if should_return:
+            return ret
+        else:
+            print self.get_output(ret, self.o_format, self.delimeter)
+
+    def get(self, address=None, name=None, n_type="host:record", ipv6=False):
+        ret = False
+        if name and n_type == "host:record":
+            print 'here'
+            ret = self.search_by_record_name(
+                name,
+            )
+        """
+        if ret is None:
+            print "Unable to get Nework: {network}".format(
+                network=network
+            )
+        else:
+            print self.get_output(ret, self.o_format, self.delimeter)
+        """

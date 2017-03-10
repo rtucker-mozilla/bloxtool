@@ -38,21 +38,22 @@ def host_process_cli(config, auth, opt):
     elif opt['create'] is True:
         name = opt['<name>']
         ipv4addrs = opt['<ipv4addrs>']
-        mac = opt['<mac>']
+        try:
+            mac = opt['<mac_address>']
+        except KeyError:
+            mac=None
 
         n.create_host(
             name,
             ipv4addrs,
             mac,
-            disable=disable,
-            members=members,
         )
         if n.api_out.has_error:
             print "Unable to Create Host: %s" % network
             sys.exit(2)
         else:
             print "Host Created Successfully"
-            n.get(network)
+            n.get(name=name, n_type="record:host")
     if opt['delete'] is True:
         network = opt['<network>']
         if network is not None:
