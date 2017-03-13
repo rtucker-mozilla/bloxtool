@@ -2,6 +2,7 @@
 """bloxtool.py
 
 Usage:
+  bloxtool.py globalsearch <search_string> [--objtype=""][--exact][--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
   bloxtool.py fixedaddress search mac <mac_address> [--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
   bloxtool.py fixedaddress search address <ipv4addr> [--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
   bloxtool.py fixedaddress create <name> <ipv4addr> <mac_address> [--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
@@ -40,6 +41,7 @@ from fixedaddress_process_cli import fixedaddress_process_cli
 from network_process_cli import network_process_cli
 from networkcontainer_process_cli import networkcontainer_process_cli
 from host_process_cli import host_process_cli
+from global_search_process_cli import global_search_process_cli
 import os
 
 
@@ -59,3 +61,5 @@ if __name__ == '__main__':
         networkcontainer_process_cli(config, auth, opt)
     elif opt['host']:
         host_process_cli(config, auth, opt)
+    elif opt['globalsearch']:
+        global_search_process_cli(config, auth, opt)

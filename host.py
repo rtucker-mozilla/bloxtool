@@ -84,7 +84,7 @@ class Host(BaseMixin):
         url = "record:host"
         data = {}
         addrobj = {}
-        addrobj['ipv4addr'] = "10.48.8.43"
+        addrobj['ipv4addr'] = ipv4addrs
         if mac:
             addrobj['mac'] = mac
         data['ipv4addrs'] = [addrobj]
