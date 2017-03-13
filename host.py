@@ -115,6 +115,19 @@ class Host(BaseMixin):
         else:
             print self.get_output(ret, self.o_format, self.delimeter)
 
+    def list_hosts(self, should_return=False):
+        url = 'record:host'
+        ret = self.make_request(
+            url,
+            'get',
+            hostname=self.hostname,
+            auth=self.auth
+        )
+        if should_return:
+            return ret
+        else:
+            print self.get_output(ret, self.o_format, self.delimeter)
+
     def get(self, address=None, name=None, n_type="host:record", ipv6=False):
         ret = False
         if name and n_type == "host:record":
