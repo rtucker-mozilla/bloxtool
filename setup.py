@@ -7,5 +7,4 @@ setup(name='bloxtool',
       author='Rob Tucker',
       author_email='rtucker@mozilla.com',
       license='Mozilla Public License',
-      packages=['bloxtool'],
       zip_safe=False)
