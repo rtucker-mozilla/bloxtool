@@ -35,14 +35,15 @@ Options:
   -h --help     Show this screen.
   members is a comma separated list of members
 """  # nopep8
+import sys
+import os
 from docopt import docopt
-from config import get_config
 from fixedaddress_process_cli import fixedaddress_process_cli
 from network_process_cli import network_process_cli
 from networkcontainer_process_cli import networkcontainer_process_cli
 from host_process_cli import host_process_cli
 from global_search_process_cli import global_search_process_cli
-import os
+from config import get_config
 
 
 if __name__ == '__main__':
