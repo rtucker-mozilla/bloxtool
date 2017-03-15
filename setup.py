@@ -1,12 +1,18 @@
 from setuptools import setup, find_packages
 
 setup(name='bloxtool',
-      version='0.18',
+      version='0.20',
       description='Tool for interfacing with InfoBlox',
       url='https://github.com/rtucker-mozilla/bloxtool',
       author='Rob Tucker',
       author_email='rtucker@mozilla.com',
       license='Mozilla Public License',
-      packages=find_packages(),
-      scripts=["bloxtool/bloxtool.py"],
+      packages = [
+          'bloxtool',
+      ],
+      install_requires = [
+            "requests",
+            "docopt",
+      ],
+      scripts=["bin/bloxtool"],
       zip_safe=False)

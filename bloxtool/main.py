@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """bloxtool.py
 
 Usage:
@@ -38,15 +38,15 @@ Options:
 import sys
 import os
 from docopt import docopt
-from fixedaddress_process_cli import fixedaddress_process_cli
-from network_process_cli import network_process_cli
-from networkcontainer_process_cli import networkcontainer_process_cli
-from host_process_cli import host_process_cli
-from global_search_process_cli import global_search_process_cli
-from config import get_config
+from bloxtool.fixedaddress_process_cli import fixedaddress_process_cli
+from bloxtool.network_process_cli import network_process_cli
+from bloxtool.networkcontainer_process_cli import networkcontainer_process_cli
+from bloxtool.host_process_cli import host_process_cli
+from bloxtool.global_search_process_cli import global_search_process_cli
+from bloxtool.config import get_config
 
 
-if __name__ == '__main__':
+def main():
     opt = docopt(__doc__, version='bloxtool version 0.1.0')
     if opt['--config']:
         config_path = opt['--config']
