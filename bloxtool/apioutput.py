@@ -1,5 +1,6 @@
 import json
 import yaml
+import sys
 
 
 class APIOutput(object):
@@ -31,6 +32,9 @@ class APIOutput(object):
             self.error_message = "Resp is empty"
             return None
         self.resp = resp
+        if resp.status_code == 401:
+            print "Invalid Credentials"
+            sys.exit(2)
         self.api_data = resp.json()
         self.o_format = o_format
         self.delimeter = delimeter
