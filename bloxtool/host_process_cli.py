@@ -1,6 +1,5 @@
 from host import Host
 
-
 def host_process_cli(config, auth, opt):
     if opt['--delimeter'] is None:
         delimeter = " "
@@ -42,11 +41,16 @@ def host_process_cli(config, auth, opt):
             mac = opt['<mac_address>']
         except KeyError:
             mac=None
+        try:
+            network_block = opt['--network-block']
+        except KeyError:
+            network_block = False
 
         n.create_host(
             name,
             ipv4addrs,
             mac,
+            network_block = network_block
         )
         if n.api_out.has_error:
             print "Unable to Create Host: %s" % network

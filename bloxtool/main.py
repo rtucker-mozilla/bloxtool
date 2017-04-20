@@ -26,7 +26,7 @@ Usage:
   bloxtool host search mac <mac_address>[--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
   bloxtool host search network <network>[--type=''][--status=''][--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
   bloxtool host search attribute <attribute> value <value> network <network>[--type=''][--status=''][--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
-  bloxtool host create mac <mac_address> ipv4addrs <ipv4addrs> name <name>[--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
+  bloxtool host create mac <mac_address> ipv4addrs <ipv4addrs> name <name>[--network-block=""][--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
   bloxtool host list [--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
 
   bloxtool member list [--config=~/.bloxtool.cfg]
@@ -38,12 +38,12 @@ Options:
 import sys
 import os
 from docopt import docopt
-from bloxtool.fixedaddress_process_cli import fixedaddress_process_cli
-from bloxtool.network_process_cli import network_process_cli
-from bloxtool.networkcontainer_process_cli import networkcontainer_process_cli
-from bloxtool.host_process_cli import host_process_cli
-from bloxtool.global_search_process_cli import global_search_process_cli
-from bloxtool.config import get_config
+from fixedaddress_process_cli import fixedaddress_process_cli
+from network_process_cli import network_process_cli
+from networkcontainer_process_cli import networkcontainer_process_cli
+from host_process_cli import host_process_cli
+from global_search_process_cli import global_search_process_cli
+from config import get_config
 
 
 def main():
@@ -64,3 +64,6 @@ def main():
         host_process_cli(config, auth, opt)
     elif opt['globalsearch']:
         global_search_process_cli(config, auth, opt)
+
+if __name__ == '__main__':
+    main()

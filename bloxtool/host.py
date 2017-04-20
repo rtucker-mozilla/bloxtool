@@ -80,10 +80,15 @@ class Host(BaseMixin):
             name,
             ipv4addrs,
             mac,
+            network_block=False,
             should_print=False):
         url = "record:host"
         data = {}
         addrobj = {}
+        if ipv4addrs == 'nextavailableip' and network_block is not False:
+            ipv4addrs = 'func:nextavailableip:{}'.format(
+                network_block
+            )
         addrobj['ipv4addr'] = ipv4addrs
         if mac:
             addrobj['mac'] = mac

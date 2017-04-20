@@ -9,7 +9,7 @@ def make_request(
         data={},
         hostname='http://localhost',
         auth=None):
-    url = "%s/wapi/v1.2/%s" % (hostname, url)
+    url = "%s/wapi/v2.2/%s" % (hostname, url)
     headers = {}
     headers['Content-Type'] = 'application/json'
     if data != {}:
