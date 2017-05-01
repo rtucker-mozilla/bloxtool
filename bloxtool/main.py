@@ -27,13 +27,15 @@ Usage:
   bloxtool host search network <network>[--type=''][--status=''][--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
   bloxtool host search attribute <attribute> value <value> network <network>[--type=''][--status=''][--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
   bloxtool host create mac <mac_address> ipv4addrs <ipv4addrs> name <name>[--network-block=""][--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
+  bloxtool host get name <name>[--network-block=""][--delimeter=" "][--format=text][--config=~/.bloxtool.cfg][--extattrs]
   bloxtool host list [--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
-
+  bloxtool host attr create <option> value <value> name <name>[--config=~/.bloxtool.cfg][--delimeter=" "][--format=text][--delete]
   bloxtool member list [--config=~/.bloxtool.cfg]
 
 Options:
   -h --help     Show this screen.
   members is a comma separated list of members
+  ipv4addrs can be an ipv4 address or nextavailableip to choose one
 """  # nopep8
 import sys
 import os

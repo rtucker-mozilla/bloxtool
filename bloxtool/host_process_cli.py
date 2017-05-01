@@ -29,11 +29,32 @@ def host_process_cli(config, auth, opt):
             status=opt['--status'],
         )
     elif opt['get'] is True:
-        network = opt['<network>']
-        n.get(network)
-    elif opt['fixedaddresses'] is True:
-        network = opt['<network>']
-        n.fixedaddresses(network)
+        try:
+            name = opt['<name>']
+        except KeyError:
+            name = None
+
+        try:
+            address = opt['<address>']
+        except KeyError:
+            address = None
+
+        try:
+            extattrs = opt['--extattrs']
+        except KeyError:
+            extattrs = None
+
+        n.get(
+            address=address,
+            name=name,
+            extattrs=extattrs
+        )
+    elif opt['attr'] is True and opt['create']:
+        name = opt['<name>']
+        attr_name = opt['<option>']
+        attr_value = opt['<value>']
+        n.create_attr(name, attr_name, attr_value)
+
     elif opt['create'] is True:
         name = opt['<name>']
         ipv4addrs = opt['<ipv4addrs>']

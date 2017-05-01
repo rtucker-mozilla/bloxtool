@@ -107,8 +107,45 @@ class Host(BaseMixin):
         if should_print is True:
             print output
 
-    def search_by_record_name(self, name, should_return=False):
+    def create_attr(self, name, attr_name, attr_value):
+        host_obj = self.search_by_record_name(
+            name,
+            should_return=True,
+            extattrs=True
+        )
+        try:
+            url = host_obj.json()[0]['_ref']
+        except (IndexError, KeyError):
+            print "Unable to find host by name"
+            sys.exit(2)
+        extattrs = {}
+        try:
+            extattrs['extattrs'] = net_obj.json()[0]['extattrs']
+        except:
+            extattrs['extattrs'] = {}
+
+        extattrs['extattrs'][attr_name] = {"value": attr_value}
+        ret_obj = self.make_request(
+            url,
+            'update',
+            data=extattrs,
+            hostname=self.hostname,
+            auth=self.auth
+        )
+        try:
+            if ret_obj.status_code == 200:
+                print "Successfully created network extattr"
+            else:
+                print "Unable to create network extattr"
+                print ret_obj.json()['text']
+        except Exception, e:
+            print "Unable to create network extattr"
+            sys.exit(2)
+
+    def search_by_record_name(self, name, should_return=False, extattrs=None):
         url = 'record:host?name=%s' % name
+        if extattrs:
+            url = '{}&_return_fields%2B=extattrs'.format(url)
         ret = self.make_request(
             url,
             'get',
@@ -133,18 +170,19 @@ class Host(BaseMixin):
         else:
             print self.get_output(ret, self.o_format, self.delimeter)
 
-    def get(self, address=None, name=None, n_type="host:record", ipv6=False):
+    def get(self,
+            address=None,
+            name=None,
+            n_type="host:record",
+            ipv6=False,
+            extattrs=None
+            ):
         ret = False
         if name and n_type == "host:record":
-            print 'here'
             ret = self.search_by_record_name(
                 name,
+                extattrs=extattrs
             )
-        """
-        if ret is None:
-            print "Unable to get Nework: {network}".format(
-                network=network
-            )
+            print 'asdf'
         else:
-            print self.get_output(ret, self.o_format, self.delimeter)
-        """
+            print name
