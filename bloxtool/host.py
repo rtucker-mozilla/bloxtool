@@ -134,7 +134,7 @@ class Host(BaseMixin):
         )
         try:
             if ret_obj.status_code == 200:
-                print "Successfully created network extattr"
+                print "Successfully set host extattr"
             else:
                 print "Unable to create network extattr"
                 print ret_obj.json()['text']

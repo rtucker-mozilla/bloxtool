@@ -49,11 +49,11 @@ def host_process_cli(config, auth, opt):
             name=name,
             extattrs=extattrs
         )
-    elif opt['attr'] is True and opt['create']:
-        name = opt['<name>']
+    elif opt['attr'] is True and opt['set']:
+        hostname = opt['<hostname>']
         attr_name = opt['<option>']
         attr_value = opt['<value>']
-        n.create_attr(name, attr_name, attr_value)
+        n.create_attr(hostname, attr_name, attr_value)
 
     elif opt['create'] is True:
         name = opt['<name>']
