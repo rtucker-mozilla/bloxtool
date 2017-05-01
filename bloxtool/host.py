@@ -107,6 +107,50 @@ class Host(BaseMixin):
         if should_print is True:
             print output
 
+    def delete_attr(self, name, attr_name):
+        host_obj = self.search_by_record_name(
+            name,
+            should_return=True,
+            extattrs=True
+        )
+        try:
+            url = host_obj.json()[0]['_ref']
+        except (IndexError, KeyError):
+            print "Unable to find host by name"
+            sys.exit(2)
+        extattrs = {}
+        try:
+            extattrs['extattrs'] = host_obj.json()[0]['extattrs']
+        except:
+            extattrs['extattrs'] = {}
+
+        if attr_name in extattrs['extattrs']:
+            should_update_attrs = True
+            del extattrs['extattrs']['PDU']
+        else:
+            should_update_attrs = False
+
+        if should_update_attrs:
+            ret_obj = self.make_request(
+                url,
+                'update',
+                data=extattrs,
+                hostname=self.hostname,
+                auth=self.auth
+            )
+            try:
+                if ret_obj.status_code == 200:
+                    print "Successfully deleted host extattr"
+                else:
+                    print "Unable to create host extattr"
+                    print ret_obj.json()['text']
+            except Exception, e:
+                print "Unable to create host extattr"
+                sys.exit(2)
+        else:
+            print "attribute not found"
+            sys.exit(2)
+
     def create_attr(self, name, attr_name, attr_value):
         host_obj = self.search_by_record_name(
             name,
@@ -120,7 +164,7 @@ class Host(BaseMixin):
             sys.exit(2)
         extattrs = {}
         try:
-            extattrs['extattrs'] = net_obj.json()[0]['extattrs']
+            extattrs['extattrs'] = host_obj.json()[0]['extattrs']
         except:
             extattrs['extattrs'] = {}
 
@@ -183,6 +227,5 @@ class Host(BaseMixin):
                 name,
                 extattrs=extattrs
             )
-            print 'asdf'
         else:
             print name

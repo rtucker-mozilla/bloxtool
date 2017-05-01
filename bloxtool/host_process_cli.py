@@ -55,6 +55,11 @@ def host_process_cli(config, auth, opt):
         attr_value = opt['<value>']
         n.create_attr(hostname, attr_name, attr_value)
 
+    elif opt['attr'] is True and opt['delete']:
+        hostname = opt['<hostname>']
+        attr_name = opt['<option>']
+        n.delete_attr(hostname, attr_name)
+
     elif opt['create'] is True:
         name = opt['<name>']
         ipv4addrs = opt['<ipv4addrs>']
