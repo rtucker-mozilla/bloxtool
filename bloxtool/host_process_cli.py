@@ -85,10 +85,10 @@ def host_process_cli(config, auth, opt):
             print "Host Created Successfully"
             n.get(name=name, n_type="record:host")
     if opt['delete'] is True:
-        network = opt['<network>']
-        if network is not None:
-            ret = n.delete_network(
-                network,
+        hostname = opt['<hostname>']
+        if hostname is not None:
+            ret = n.delete_host(
+                hostname,
             )
             if ret is False:
-                print "Unable to delete network"
+                print "Unable to delete host"

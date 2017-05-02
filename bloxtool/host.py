@@ -229,3 +229,32 @@ class Host(BaseMixin):
             )
         else:
             print name
+
+    def delete_host(
+        self,
+        name,
+        should_print=True
+    ):
+        ref = None
+        del_obj = None
+
+        del_obj = self.search_by_record_name(
+            name,
+            should_return=True
+        )
+        try:
+            ref = del_obj.json()[0]['_ref']
+        except (IndexError, KeyError):
+            print "Unable to find host"
+            return None
+        if ref is not None:
+            output = self.make_request(
+                ref,
+                'delete',
+                hostname=self.hostname,
+                auth=self.auth
+            )
+            if should_print is True:
+                print "Host Successfully Deleted"
+        else:
+                print "Unable to find host"

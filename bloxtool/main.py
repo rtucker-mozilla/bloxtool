@@ -27,6 +27,7 @@ Usage:
   bloxtool host search network <network>[--type=''][--status=''][--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
   bloxtool host search attribute <attribute> value <value> network <network>[--type=''][--status=''][--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
   bloxtool host create mac <mac_address> ipv4addrs <ipv4addrs> name <name>[--network-block=""][--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
+  bloxtool host delete hostname <hostname>[--network-block=""][--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
   bloxtool host get name <name>[--network-block=""][--delimeter=" "][--format=text][--config=~/.bloxtool.cfg][--extattrs]
   bloxtool host list [--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
   bloxtool host attr set <option> value <value> hostname <hostname>[--config=~/.bloxtool.cfg][--delimeter=" "][--format=text][--delete]
