@@ -6,6 +6,7 @@ class ConfigObject(object):
     host = None
     username = None
     password = None
+    ssl_verify = True
 
     def __init__(self, config_object, ini_section):
         try:
@@ -22,6 +23,13 @@ class ConfigObject(object):
             self.password = config_object.get(ini_section, 'password')
         except:
             print 'password not in ini file'
+
+        try:
+            self.ssl_verify = config_object.get(ini_section, 'ssl_verify')
+            if self.ssl_verify.upper() == 'FALSE':
+                self.ssl_verify = False
+        except:
+            self.ssl_verify = True
 
 
 def read_config_object(filepath):

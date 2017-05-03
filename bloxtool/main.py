@@ -57,6 +57,14 @@ def main():
     else:
         config_path = os.path.join(os.environ["HOME"], ".bloxtool.cfg")
     config = get_config(config_path)
+
+    try:
+        if config.ssl_verify is False:
+            import requests
+            requests.packages.urllib3.disable_warnings()
+    except (AttributeError):
+        pass
+
     auth = (config.username, config.password,)
     if opt['fixedaddress']:
         fixedaddress_process_cli(config, auth, opt)
@@ -70,4 +78,5 @@ def main():
         global_search_process_cli(config, auth, opt)
 
 if __name__ == '__main__':
+
     main()
