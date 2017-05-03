@@ -78,5 +78,4 @@ def main():
         global_search_process_cli(config, auth, opt)
 
 if __name__ == '__main__':
-
     main()
