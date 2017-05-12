@@ -151,6 +151,60 @@ class Host(BaseMixin):
             print "attribute not found"
             sys.exit(2)
 
+    def delete_dhcpoption(self, name, option_name):
+        resp_obj = self.search_by_record_name(
+            name,
+            should_return=True,
+            extattrs=True,
+            options=True
+        )
+        vendor_class = 'DHCP'
+        try:
+            host_obj = resp_obj.json()
+            options_url = host_obj[0]['ipv4addrs'][0]['_ref']
+        except (IndexError, KeyError):
+            # No options
+            # This should mean that the host object doesn't have
+            # any ipv4 information associated
+            print "No ipv4 information associated with %s" % (name)
+            sys.exit(2)
+        option = {}
+        try:
+            t_obj = host_obj[0]['ipv4addrs'][0]
+            options = t_obj['options']
+        except (IndexError, KeyError):
+            options = []
+        if options != []:
+            try:
+                option = [o for o in options if o['name'] == option_name and o['vendor_class'] == 'DHCP'][0]
+            except (IndexError, KeyError):
+                pass
+
+        t_options = []
+        if option != {}:
+            for o in options:
+                if o['name'] != option_name:
+                    t_options.append(o)
+
+        del t_obj['host']
+        t_obj['options'] = t_options
+
+        ret_obj = self.make_request(
+            options_url,
+            'update',
+            data=t_obj,
+            hostname=self.hostname,
+            auth=self.auth
+        )
+        try:
+            if ret_obj.status_code == 200:
+                print "Successfully deleted host dhcpoption"
+            else:
+                print "Unable to create network dhcpoption"
+                print ret_obj.json()['text']
+        except Exception, e:
+            print "Unable to create network extattr"
+            sys.exit(2)
     def set_dhcpoption(self, name, option_name, option_value):
         resp_obj = self.search_by_record_name(
             name,
@@ -203,7 +257,6 @@ class Host(BaseMixin):
             if ret_obj.status_code == 200:
                 print "Successfully set host dhcpoption"
             else:
-                import pdb; pdb.set_trace()
                 print "Unable to create network dhcpoption"
                 print ret_obj.json()['text']
         except Exception, e:

@@ -72,6 +72,11 @@ def host_process_cli(config, auth, opt):
         option_value = opt['<value>']
         n.set_dhcpoption(hostname, option_name, option_value)
 
+    elif opt['dhcpoption'] is True and opt['delete']:
+        hostname = opt['<hostname>']
+        attr_name = opt['<option>']
+        n.delete_dhcpoption(hostname, attr_name)
+
     elif opt['create'] is True:
         name = opt['<name>']
         ipv4addrs = opt['<ipv4addrs>']
@@ -96,7 +101,7 @@ def host_process_cli(config, auth, opt):
         else:
             print "Host Created Successfully"
             n.get(name=name, n_type="record:host")
-    if opt['delete'] is True:
+    if opt['delete'] is True and not opt['dhcpoption']:
         hostname = opt['<hostname>']
         if hostname is not None:
             ret = n.delete_host(

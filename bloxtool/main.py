@@ -33,6 +33,7 @@ Usage:
   bloxtool host attr set <option> value <value> hostname <hostname>[--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
   bloxtool host attr delete <option> hostname <hostname>[--config=~/.bloxtool.cfg][--delimeter=" "][--format=text][--delete]
   bloxtool host dhcpoption set <option> value <value> hostname <hostname>[--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
+  bloxtool host dhcpoption delete <option> hostname <hostname>[--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
   bloxtool member list [--config=~/.bloxtool.cfg]
 
 Options:
