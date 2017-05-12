@@ -10,7 +10,9 @@ username = user@domain.com
 password = foo bar baz  
 ssl_verify = true  
 
-## Example Usage
+## Help
+**bloxtool -h**   
+## Cookbook
 *Italicized* denotes a user supplied argument  
 ### Host
 bloxtool host get hostname *foo.domain.com*  
