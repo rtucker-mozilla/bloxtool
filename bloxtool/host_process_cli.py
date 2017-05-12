@@ -66,6 +66,12 @@ def host_process_cli(config, auth, opt):
         attr_name = opt['<option>']
         n.delete_attr(hostname, attr_name)
 
+    elif opt['dhcpoption'] is True and opt['set']:
+        hostname = opt['<hostname>']
+        option_name = opt['<option>']
+        option_value = opt['<value>']
+        n.set_dhcpoption(hostname, option_name, option_value)
+
     elif opt['create'] is True:
         name = opt['<name>']
         ipv4addrs = opt['<ipv4addrs>']

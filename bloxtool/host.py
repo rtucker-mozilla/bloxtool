@@ -151,36 +151,60 @@ class Host(BaseMixin):
             print "attribute not found"
             sys.exit(2)
 
-    def create_attr(self, name, attr_name, attr_value):
-        host_obj = self.search_by_record_name(
+    def set_dhcpoption(self, name, option_name, option_value):
+        resp_obj = self.search_by_record_name(
             name,
             should_return=True,
-            extattrs=True
+            extattrs=True,
+            options=True
         )
+        vendor_class = 'DHCP'
         try:
-            url = host_obj.json()[0]['_ref']
+            host_obj = resp_obj.json()
+            options_url = host_obj[0]['ipv4addrs'][0]['_ref']
         except (IndexError, KeyError):
-            print "Unable to find host by name"
+            # No options
+            # This should mean that the host object doesn't have
+            # any ipv4 information associated
+            print "No ipv4 information associated with %s" % (name)
             sys.exit(2)
-        extattrs = {}
+        option = {}
         try:
-            extattrs['extattrs'] = host_obj.json()[0]['extattrs']
-        except:
-            extattrs['extattrs'] = {}
+            t_obj = host_obj[0]['ipv4addrs'][0]
+            options = t_obj['options']
+        except (IndexError, KeyError):
+            options = []
+        if options != []:
+            try:
+                option = [o for o in options if o['name'] == option_name and o['vendor_class'] == 'DHCP'][0]
+            except (IndexError, KeyError):
+                pass
 
-        extattrs['extattrs'][attr_name] = {"value": attr_value}
+        if option != {}:
+            for o in options:
+                if o['name'] == option_name:
+                    o['value'] = option_value
+        else:
+            option['name'] = option_name
+            option['value'] = option_value
+            options.append(option)
+
+        del t_obj['host']
+        t_obj['options'] = options
+
         ret_obj = self.make_request(
-            url,
+            options_url,
             'update',
-            data=extattrs,
+            data=t_obj,
             hostname=self.hostname,
             auth=self.auth
         )
         try:
             if ret_obj.status_code == 200:
-                print "Successfully set host extattr"
+                print "Successfully set host dhcpoption"
             else:
-                print "Unable to create network extattr"
+                import pdb; pdb.set_trace()
+                print "Unable to create network dhcpoption"
                 print ret_obj.json()['text']
         except Exception, e:
             print "Unable to create network extattr"
