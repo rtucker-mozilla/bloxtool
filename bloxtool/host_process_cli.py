@@ -30,9 +30,9 @@ def host_process_cli(config, auth, opt):
         )
     elif opt['get'] is True:
         try:
-            name = opt['<name>']
+            hostname = opt['<hostname>']
         except KeyError:
-            name = None
+            hostname = None
 
         try:
             address = opt['<address>']
@@ -51,7 +51,7 @@ def host_process_cli(config, auth, opt):
 
         n.get(
             address=address,
-            name=name,
+            name=hostname,
             extattrs=extattrs,
             options=options
         )
@@ -78,7 +78,7 @@ def host_process_cli(config, auth, opt):
         n.delete_dhcpoption(hostname, attr_name)
 
     elif opt['create'] is True:
-        name = opt['<name>']
+        hostname = opt['<hostname>']
         ipv4addrs = opt['<ipv4addrs>']
         try:
             mac = opt['<mac_address>']
@@ -90,7 +90,7 @@ def host_process_cli(config, auth, opt):
             network_block = False
 
         n.create_host(
-            name,
+            hostname,
             ipv4addrs,
             mac,
             network_block = network_block
