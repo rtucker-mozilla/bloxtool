@@ -28,7 +28,7 @@ Usage:
   bloxtool host search attribute <attribute> value <value> network <network>[--type=''][--status=''][--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
   bloxtool host create mac <mac_address> ipv4addrs <ipv4addrs> name <name>[--network-block=""][--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
   bloxtool host delete hostname <hostname>[--network-block=""][--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
-  bloxtool host get name <name>[--network-block=""][--delimeter=" "][--format=text][--config=~/.bloxtool.cfg][--extattrs]
+  bloxtool host get name <name>[--network-block=""][--delimeter=" "][--format=text][--config=~/.bloxtool.cfg][--extattrs][--options]
   bloxtool host list [--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]
   bloxtool host attr set <option> value <value> hostname <hostname>[--config=~/.bloxtool.cfg][--delimeter=" "][--format=text][--delete]
   bloxtool host attr delete <option> hostname <hostname>[--config=~/.bloxtool.cfg][--delimeter=" "][--format=text][--delete]
@@ -78,5 +78,4 @@ def main():
         global_search_process_cli(config, auth, opt)
 
 if __name__ == '__main__':
-
     main()

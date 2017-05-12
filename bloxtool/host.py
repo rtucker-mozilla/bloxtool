@@ -186,10 +186,12 @@ class Host(BaseMixin):
             print "Unable to create network extattr"
             sys.exit(2)
 
-    def search_by_record_name(self, name, should_return=False, extattrs=None):
+    def search_by_record_name(self, name, should_return=False, extattrs=None, options=None):
         url = 'record:host?name=%s' % name
         if extattrs:
             url = '{}&_return_fields%2B=extattrs'.format(url)
+        if options:
+            url = '{}&_return_fields%2B=ipv4addrs.options'.format(url)
         ret = self.make_request(
             url,
             'get',
@@ -219,13 +221,15 @@ class Host(BaseMixin):
             name=None,
             n_type="host:record",
             ipv6=False,
-            extattrs=None
+            extattrs=None,
+            options=False
             ):
         ret = False
         if name and n_type == "host:record":
             ret = self.search_by_record_name(
                 name,
-                extattrs=extattrs
+                extattrs=extattrs,
+                options=options
             )
         else:
             print name
@@ -240,7 +244,8 @@ class Host(BaseMixin):
 
         del_obj = self.search_by_record_name(
             name,
-            should_return=True
+            should_return=True,
+            options=True
         )
         try:
             ref = del_obj.json()[0]['_ref']

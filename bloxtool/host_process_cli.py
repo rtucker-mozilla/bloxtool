@@ -44,10 +44,16 @@ def host_process_cli(config, auth, opt):
         except KeyError:
             extattrs = None
 
+        try:
+            options = opt['--options']
+        except KeyError:
+            options = None
+
         n.get(
             address=address,
             name=name,
-            extattrs=extattrs
+            extattrs=extattrs,
+            options=options
         )
     elif opt['attr'] is True and opt['set']:
         hostname = opt['<hostname>']
