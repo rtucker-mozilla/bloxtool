@@ -5,10 +5,10 @@ Command Line tools for interfacing with InfoBlox appliances
 ~/.bloxtool.cfg
 
 [InfoBlox]
-host = https://localhost
-username = user@domain.com
-password = foo bar baz
-ssl_verify = true
+host = https://localhost  
+username = user@domain.com  
+password = foo bar baz  
+ssl_verify = true  
 
 ## Example Usage
 ### Host
