@@ -100,7 +100,7 @@ def host_process_cli(config, auth, opt):
             sys.exit(2)
         else:
             print "Host Created Successfully"
-            n.get(name=name, n_type="record:host")
+            n.get(name=hostname, n_type="record:host")
     if opt['delete'] is True and not opt['dhcpoption']:
         hostname = opt['<hostname>']
         if hostname is not None:
