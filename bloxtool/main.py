@@ -36,6 +36,7 @@ Usage:
   bloxtool host dhcpoption set <option> value <value> hostname <hostname>[--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
   bloxtool host dhcpoption delete <option> hostname <hostname>[--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
   bloxtool member list [--config=~/.bloxtool.cfg]
+  bloxtool zoneauth create zone <zone> view <view> [--grid-primary=""][--ns-group=""][--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
 
 Options:
   -h --help     Show this screen.
@@ -50,6 +51,7 @@ from network_process_cli import network_process_cli
 from networkcontainer_process_cli import networkcontainer_process_cli
 from host_process_cli import host_process_cli
 from global_search_process_cli import global_search_process_cli
+from zoneauth_process_cli import zoneauth_process_cli
 from config import get_config
 
 
@@ -79,6 +81,8 @@ def main():
         host_process_cli(config, auth, opt)
     elif opt['globalsearch']:
         global_search_process_cli(config, auth, opt)
+    elif opt['zoneauth']:
+        zoneauth_process_cli(config, auth, opt)
 
 if __name__ == '__main__':
     main()
