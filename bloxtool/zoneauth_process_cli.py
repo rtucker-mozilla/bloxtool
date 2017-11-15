@@ -43,3 +43,11 @@ def zoneauth_process_cli(config, auth, opt):
             ns_group = ns_group,
             grid_primary = grid_primary
         )
+
+    if opt['delete'] is True:
+        zone = opt['<zone>']
+        view = opt['<view>']
+        z.delete_zoneauth(
+            zone,
+            view
+        )
