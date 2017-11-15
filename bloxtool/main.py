@@ -37,6 +37,7 @@ Usage:
   bloxtool host dhcpoption delete <option> hostname <hostname>[--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
   bloxtool member list [--config=~/.bloxtool.cfg]
   bloxtool zoneauth create zone <zone> view <view> [--grid-primary=""][--ns-group=""][--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
+  bloxtool zoneauth delete zone <zone> view <view> [--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
 
 Options:
   -h --help     Show this screen.
