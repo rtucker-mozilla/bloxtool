@@ -11,6 +11,7 @@ Usage:
   bloxtool fixedaddress option <option> value <value> address <ipv4addr>[--config=~/.bloxtool.cfg][--delimeter=" "][--format=text][--delete]
   bloxtool network list [-6][--config=~/.bloxtool.cfg][--delimeter=" "][--format=text][--extattrs]
   bloxtool network fixedaddresses <network> [--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
+  bloxtool network zoneassociation create zone <zone> view <view> network <network> [--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
   bloxtool network get <network> [-6][--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
   bloxtool network delete <network> [-6][--config=~/.bloxtool.cfg][--delimeter=" "][--format=text]
   bloxtool network search name <name> [-6][--delimeter=" "][--format=text][--config=~/.bloxtool.cfg]

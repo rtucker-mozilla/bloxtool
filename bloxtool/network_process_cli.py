@@ -51,6 +51,12 @@ def network_process_cli(config, auth, opt):
     elif opt['fixedaddresses'] is True:
         network = opt['<network>']
         n.fixedaddresses(network)
+    elif opt['zoneassociation'] is True:
+        if opt['create'] is True:
+            zone = opt['<zone>']
+            view = opt['<view>']
+            network = opt['<network>']
+            n.create_zoneassociation(zone, view, network)
     elif opt['option'] is True and opt['create']:
         network_block = opt['<network_block>']
         option_name = opt['<option>']

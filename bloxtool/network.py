@@ -42,6 +42,54 @@ class Network(BaseMixin):
         )
         print self.get_output(ret, self.o_format, self.delimeter)
 
+    def create_zoneassociation(self, zone, view, network):
+        net_obj = self.search_by_ipv4addr(network, should_return=True)
+        try:
+            url = net_obj.json()[0]['_ref']
+        except (IndexError, KeyError):
+            print "Unable to find fixed address by ip"
+            sys.exit(2)
+        zone_associations = self.make_request(
+            url + "?_return_fields=zone_associations",
+            'get',
+            hostname=self.hostname,
+            auth=self.auth
+        )
+        try:
+            l_zone_associations = zone_associations.json()['zone_associations']
+        except (IndexError, KeyError):
+            l_zone_associations = []
+
+        l_zone_associations.append({
+            'fqdn': zone,
+            'view': view,
+        })
+
+        data = {}
+        data['zone_associations'] = l_zone_associations
+
+        try:
+            ret_obj = self.make_request(
+                url,
+                'update',
+                data=data,
+                hostname=self.hostname,
+                auth=self.auth
+            )
+        except Exception, e:
+            pass
+
+        try:
+            if ret_obj.status_code == 200:
+                print "Successfully created zone association"
+            else:
+                print "Unable to create zone association"
+                print ret_obj.json()['text']
+        except Exception, e:
+            print "Unable to create zone association"
+            sys.exit(2)
+        pass
+
     def create_option(self, network, option_name, option_value):
         net_obj = self.search_by_ipv4addr(network, should_return=True)
         try:
