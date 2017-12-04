@@ -23,5 +23,5 @@ bloxtool host create mac *"00:00:00:00:00:00"* ipv4addrs *nextavailableip* name 
 bloxtool host dhcpoption set *host-name* value *different-foo.domain.com* hostname *foo.domain.com*  
 bloxtool host dhcpoption delete *host-name* hostname *foo.domain.com*  
 ### Create Authoratative Zone
-bloxtool zoneauth create zone foo.bar.domain.com view 'View Name' --ns-group='Nameserver Group'  
-bloxtool network zoneassociation create zone foo.bar.domain.com view 'View Name' network 10.0.0.0/21  
+bloxtool zoneauth create zone *foo.bar.domain.com* view *'View Name'* --ns-group=*'Nameserver Group'*  
+bloxtool network zoneassociation create zone *foo.bar.domain.com* view *'View Name'* network *10.0.0.0/21*  
