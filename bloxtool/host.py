@@ -80,6 +80,7 @@ class Host(BaseMixin):
             name,
             ipv4addrs,
             mac,
+            view,
             network_block=False,
             should_print=False):
         url = "record:host"
@@ -95,7 +96,7 @@ class Host(BaseMixin):
         data['ipv4addrs'] = [addrobj]
         data['name'] = name
         addrobj['ipv4addr'] = ipv4addrs
-        data['view'] = "MDC1 Private"
+        data['view'] = view
         ret = make_request(
             url,
             'create',
@@ -106,6 +107,40 @@ class Host(BaseMixin):
         output = self.get_output(ret, self.o_format, self.delimeter)
         if should_print is True:
             print output
+
+    def set_mac(self, name, mac):
+        host_obj = self.search_by_record_name(
+            name,
+            should_return=True,
+            extattrs=True
+        )
+        try:
+            url = host_obj.json()[0]['_ref']
+        except (IndexError, KeyError):
+            print "Unable to find host by name"
+            sys.exit(2)
+
+        data = host_obj.json()
+        url = data[0][u'ipv4addrs'][0]['_ref']
+        mac_data = {}
+        mac_data['mac'] = mac
+        ret_obj = self.make_request(
+            url,
+            'update',
+            data=mac_data,
+            hostname=self.hostname,
+            auth=self.auth
+        )
+        try:
+            if ret_obj.status_code == 200:
+                print "Successfully set mac address"
+            else:
+                print "Unable to set mac address"
+                print ret_obj.json()['text']
+        except Exception, e:
+            print e
+            print "Unable to create network extattr"
+            sys.exit(2)
 
     def create_attr(self, name, attr_name, attr_value):
         host_obj = self.search_by_record_name(

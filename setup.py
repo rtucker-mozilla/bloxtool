@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='bloxtool',
-      version='0.33',
+      version='0.35',
       description='Tool for interfacing with InfoBlox',
       url='https://github.com/rtucker-mozilla/bloxtool',
       author='Rob Tucker',

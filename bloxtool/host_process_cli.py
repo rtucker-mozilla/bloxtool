@@ -55,6 +55,10 @@ def host_process_cli(config, auth, opt):
             extattrs=extattrs,
             options=options
         )
+    elif opt['setmac']:
+        hostname = opt['<hostname>']
+        mac = opt['<mac>']
+        n.set_mac(hostname, mac)
     elif opt['attr'] is True and opt['set']:
         hostname = opt['<hostname>']
         attr_name = opt['<option>']
@@ -80,6 +84,7 @@ def host_process_cli(config, auth, opt):
     elif opt['create'] is True:
         hostname = opt['<hostname>']
         ipv4addrs = opt['<ipv4addrs>']
+        view = opt['<view>']
         try:
             mac = opt['<mac_address>']
         except KeyError:
@@ -93,6 +98,7 @@ def host_process_cli(config, auth, opt):
             hostname,
             ipv4addrs,
             mac,
+            view,
             network_block = network_block
         )
         if n.api_out.has_error:
