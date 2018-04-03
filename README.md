@@ -1,6 +1,10 @@
 # bloxtool
 Command Line tools for interfacing with InfoBlox appliances
 
+## installation
+to install v0.36
+pip install -e git+git://github.com/rtucker-mozilla/bloxtool.git@v0.36#egg=bloxtool
+
 ## Configuration File
 ~/.bloxtool.cfg
 
