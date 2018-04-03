@@ -1,0 +1,5 @@
+*.pyc
+build/
+dist/
+*.sw[op]
+bloxtool.egg-info/
