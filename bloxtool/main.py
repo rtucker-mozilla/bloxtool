@@ -58,7 +58,7 @@ from config import get_config
 
 
 def main():
-    opt = docopt(__doc__, version='bloxtool version 0.1.0')
+    opt = docopt(__doc__, version='bloxtool version 0.36')
     if opt['--config']:
         config_path = opt['--config']
     else:
