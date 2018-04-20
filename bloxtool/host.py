@@ -48,7 +48,7 @@ class Host(BaseMixin):
             hostname=self.hostname,
             auth=self.auth
         )
-        print self.get_output(ret, self.o_format, self.delimeter)
+        print(self.get_output(ret, self.o_format, self.delimeter))
 
     def search_by_attribute_value(
         self,
@@ -73,7 +73,7 @@ class Host(BaseMixin):
             hostname=self.hostname,
             auth=self.auth
         )
-        print self.get_output(ret, self.o_format, self.delimeter)
+        print(self.get_output(ret, self.o_format, self.delimeter))
 
     def create_host(
             self,
@@ -106,7 +106,7 @@ class Host(BaseMixin):
         )
         output = self.get_output(ret, self.o_format, self.delimeter)
         if should_print is True:
-            print output
+            print(output)
 
     def set_mac(self, name, mac):
         host_obj = self.search_by_record_name(
@@ -117,7 +117,7 @@ class Host(BaseMixin):
         try:
             url = host_obj.json()[0]['_ref']
         except (IndexError, KeyError):
-            print "Unable to find host by name"
+            print("Unable to find host by name")
             sys.exit(2)
 
         data = host_obj.json()
@@ -133,13 +133,13 @@ class Host(BaseMixin):
         )
         try:
             if ret_obj.status_code == 200:
-                print "Successfully set mac address"
+                print("Successfully set mac address")
             else:
-                print "Unable to set mac address"
-                print ret_obj.json()['text']
-        except Exception, e:
-            print e
-            print "Unable to create network extattr"
+                print("Unable to set mac address")
+                print(ret_obj.json()['text'])
+        except Exception as e:
+            print(e)
+            print("Unable to create network extattr")
             sys.exit(2)
 
     def create_attr(self, name, attr_name, attr_value):
@@ -151,7 +151,7 @@ class Host(BaseMixin):
         try:
             url = host_obj.json()[0]['_ref']
         except (IndexError, KeyError):
-            print "Unable to find host by name"
+            print("Unable to find host by name")
             sys.exit(2)
         extattrs = {}
         try:
@@ -169,12 +169,12 @@ class Host(BaseMixin):
         )
         try:
             if ret_obj.status_code == 200:
-                print "Successfully set host extattr"
+                print("Successfully set host extattr")
             else:
-                print "Unable to create network extattr"
-                print ret_obj.json()['text']
-        except Exception, e:
-            print "Unable to create network extattr"
+                print("Unable to create network extattr")
+                print(ret_obj.json()['text'])
+        except Exception as e:
+            print("Unable to create network extattr")
             sys.exit(2)
 
     def delete_attr(self, name, attr_name):
@@ -186,7 +186,7 @@ class Host(BaseMixin):
         try:
             url = host_obj.json()[0]['_ref']
         except (IndexError, KeyError):
-            print "Unable to find host by name"
+            print("Unable to find host by name")
             sys.exit(2)
         extattrs = {}
         try:
@@ -210,15 +210,15 @@ class Host(BaseMixin):
             )
             try:
                 if ret_obj.status_code == 200:
-                    print "Successfully deleted host extattr"
+                    print("Successfully deleted host extattr")
                 else:
-                    print "Unable to create host extattr"
-                    print ret_obj.json()['text']
-            except Exception, e:
-                print "Unable to create host extattr"
+                    print("Unable to create host extattr")
+                    print(ret_obj.json()['text'])
+            except Exception as e:
+                print("Unable to create host extattr")
                 sys.exit(2)
         else:
-            print "attribute not found"
+            print("attribute not found")
             sys.exit(2)
 
     def delete_dhcpoption(self, name, option_name):
@@ -236,7 +236,7 @@ class Host(BaseMixin):
             # No options
             # This should mean that the host object doesn't have
             # any ipv4 information associated
-            print "No ipv4 information associated with %s" % (name)
+            print("No ipv4 information associated with %s" % (name))
             sys.exit(2)
         option = {}
         try:
@@ -268,12 +268,12 @@ class Host(BaseMixin):
         )
         try:
             if ret_obj.status_code == 200:
-                print "Successfully deleted host dhcpoption"
+                print("Successfully deleted host dhcpoption")
             else:
-                print "Unable to create network dhcpoption"
-                print ret_obj.json()['text']
-        except Exception, e:
-            print "Unable to create network extattr"
+                print("Unable to create network dhcpoption")
+                print(ret_obj.json()['text'])
+        except Exception as e:
+            print("Unable to create network extattr")
             sys.exit(2)
     def set_dhcpoption(self, name, option_name, option_value):
         resp_obj = self.search_by_record_name(
@@ -290,7 +290,7 @@ class Host(BaseMixin):
             # No options
             # This should mean that the host object doesn't have
             # any ipv4 information associated
-            print "No ipv4 information associated with %s" % (name)
+            print("No ipv4 information associated with %s" % (name))
             sys.exit(2)
         option = {}
         try:
@@ -325,12 +325,12 @@ class Host(BaseMixin):
         )
         try:
             if ret_obj.status_code == 200:
-                print "Successfully set host dhcpoption"
+                print("Successfully set host dhcpoption")
             else:
-                print "Unable to create network dhcpoption"
-                print ret_obj.json()['text']
+                print("Unable to create network dhcpoption")
+                print(ret_obj.json()['text'])
         except Exception, e:
-            print "Unable to create network extattr"
+            print("Unable to create network extattr")
             sys.exit(2)
 
     def search_by_record_name(self, name, should_return=False, extattrs=None, options=None):
@@ -348,7 +348,7 @@ class Host(BaseMixin):
         if should_return:
             return ret
         else:
-            print self.get_output(ret, self.o_format, self.delimeter)
+            print(self.get_output(ret, self.o_format, self.delimeter))
 
     def list_hosts(self, should_return=False):
         url = 'record:host'
@@ -361,7 +361,7 @@ class Host(BaseMixin):
         if should_return:
             return ret
         else:
-            print self.get_output(ret, self.o_format, self.delimeter)
+            print(self.get_output(ret, self.o_format, self.delimeter))
 
     def get(self,
             address=None,
@@ -379,7 +379,7 @@ class Host(BaseMixin):
                 options=options
             )
         else:
-            print name
+            print(name)
 
     def delete_host(
         self,
@@ -397,7 +397,7 @@ class Host(BaseMixin):
         try:
             ref = del_obj.json()[0]['_ref']
         except (IndexError, KeyError):
-            print "Unable to find host"
+            print("Unable to find host")
             return None
         if ref is not None:
             output = self.make_request(
@@ -407,6 +407,6 @@ class Host(BaseMixin):
                 auth=self.auth
             )
             if should_print is True:
-                print "Host Successfully Deleted"
+                print("Host Successfully Deleted")
         else:
-                print "Unable to find host"
+                print("Unable to find host")
