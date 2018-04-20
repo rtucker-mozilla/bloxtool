@@ -121,7 +121,7 @@ class Network(BaseMixin):
                 hostname=self.hostname,
                 auth=self.auth
             )
-        except Exception, e:
+        except Exception as e:
             pass
         try:
             if ret_obj.status_code == 200:
