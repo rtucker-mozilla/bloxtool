@@ -83,7 +83,7 @@ class FixedAddress(BaseMixin):
             else:
                 print("Unable to create dhcp option")
                 print(ret_obj.json()['text'])
-        except Exception, e:
+        except Exception as e:
             print("Unable to create dhcp option")
             sys.exit(2)
 
@@ -124,7 +124,7 @@ class FixedAddress(BaseMixin):
             else:
                 print("Unable to delete dhcp option")
                 print(ret_obj.json()['text'])
-        except Exception, e:
+        except Exception as e:
             print("Unable to delete dhcp option")
             sys.exit(2)
 
