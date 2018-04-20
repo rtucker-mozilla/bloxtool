@@ -32,7 +32,7 @@ class BaseMixin(object):
         self.api_out = APIOutput(ret, o_format=o_format, delimeter=delimeter)
         has_error, error_text = self.api_out.process_resp()
         if has_error is True:
-            print error_text
+            print(error_text)
             sys.exit(2)
         formatted_text = self.api_out.format_text()
         return formatted_text
