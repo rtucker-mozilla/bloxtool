@@ -42,13 +42,13 @@ def networkcontainer_process_cli(config, auth, opt):
             name
         )
         if n.api_out.has_error:
-            print "Unable to Create Network Container: %s" % network
+            print("Unable to Create Network Container: %s" % network)
             sys.exit(2)
         else:
-            print "Network Container Created Successfully"
+            print("Network Container Created Successfully")
             n.get(network)
     elif opt['option'] is True and opt['create']:
-        print 'in option'
+        print('in option')
         network_block = opt['<network_block>']
         option_name = opt['<option>']
         option_value = opt['<value>']
@@ -63,4 +63,4 @@ def networkcontainer_process_cli(config, auth, opt):
                 network,
             )
             if ret is False:
-                print "Unable to delete network container"
+                print("Unable to delete network container")
