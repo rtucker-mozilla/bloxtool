@@ -33,7 +33,7 @@ class APIOutput(object):
             return None
         self.resp = resp
         if resp.status_code == 401:
-            print "Invalid Credentials"
+            print("Invalid Credentials")
             sys.exit(2)
         self.api_data = resp.json()
         self.o_format = o_format
