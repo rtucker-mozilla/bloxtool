@@ -25,7 +25,7 @@ class Network(BaseMixin):
         if should_return:
             return ret
         else:
-            print self.get_output(ret, self.o_format, self.delimeter)
+            print(self.get_output(ret, self.o_format, self.delimeter))
 
 
     def list_networks(self, include_extattrs=False, ipv6=False):
@@ -40,14 +40,14 @@ class Network(BaseMixin):
             hostname=self.hostname,
             auth=self.auth
         )
-        print self.get_output(ret, self.o_format, self.delimeter)
+        print(self.get_output(ret, self.o_format, self.delimeter))
 
     def create_zoneassociation(self, zone, view, network):
         net_obj = self.search_by_ipv4addr(network, should_return=True)
         try:
             url = net_obj.json()[0]['_ref']
         except (IndexError, KeyError):
-            print "Unable to find fixed address by ip"
+            print("Unable to find fixed address by ip")
             sys.exit(2)
         zone_associations = self.make_request(
             url + "?_return_fields=zone_associations",
@@ -81,12 +81,12 @@ class Network(BaseMixin):
 
         try:
             if ret_obj.status_code == 200:
-                print "Successfully created zone association"
+                print("Successfully created zone association")
             else:
-                print "Unable to create zone association"
-                print ret_obj.json()['text']
-        except Exception, e:
-            print "Unable to create zone association"
+                print("Unable to create zone association")
+                print(ret_obj.json()['text'])
+        except Exception as e:
+            print("Unable to create zone association")
             sys.exit(2)
         pass
 
@@ -95,7 +95,7 @@ class Network(BaseMixin):
         try:
             url = net_obj.json()[0]['_ref']
         except (IndexError, KeyError):
-            print "Unable to find fixed address by ip"
+            print("Unable to find fixed address by ip")
             sys.exit(2)
         data = {}
         existing_options = self.make_request(
@@ -125,12 +125,12 @@ class Network(BaseMixin):
             pass
         try:
             if ret_obj.status_code == 200:
-                print "Successfully created network option"
+                print("Successfully created network option")
             else:
-                print "Unable to create network option"
-                print ret_obj.json()['text']
-        except Exception, e:
-            print "Unable to create network option"
+                print("Unable to create network option")
+                print(ret_obj.json()['text'])
+        except Exception as e:
+            print("Unable to create network option")
             sys.exit(2)
 
     def create_attr(self, network, attr_name, attr_value):
@@ -142,7 +142,7 @@ class Network(BaseMixin):
         try:
             url = net_obj.json()[0]['_ref']
         except (IndexError, KeyError):
-            print "Unable to find fixed address by ip"
+            print("Unable to find fixed address by ip")
             sys.exit(2)
         extattrs = {}
         try:
@@ -160,12 +160,12 @@ class Network(BaseMixin):
         )
         try:
             if ret_obj.status_code == 200:
-                print "Successfully created network extattr"
+                print("Successfully created network extattr")
             else:
-                print "Unable to create network extattr"
-                print ret_obj.json()['text']
-        except Exception, e:
-            print "Unable to create network extattr"
+                print("Unable to create network extattr")
+                print(ret_obj.json()['text'])
+        except Exception as e:
+            print("Unable to create network extattr")
             sys.exit(2)
     def add_option(self, network, option_name, option_value):
         url = 'network?comment~:=%s' % name
@@ -175,7 +175,7 @@ class Network(BaseMixin):
             hostname=self.hostname,
             auth=self.auth
         )
-        print self.get_output(ret, self.o_format, self.delimeter)
+        print(self.get_output(ret, self.o_format, self.delimeter))
 
     def search_by_name(self, name, ipv6=False):
         url = 'network?comment~:=%s' % name
@@ -188,7 +188,7 @@ class Network(BaseMixin):
             hostname=self.hostname,
             auth=self.auth
         )
-        print self.get_output(ret, self.o_format, self.delimeter)
+        print(self.get_output(ret, self.o_format, self.delimeter))
 
     def search_by_attribute_value(self, attribute, value, network=None, ipv6=False):
         network_string = ""
@@ -204,7 +204,7 @@ class Network(BaseMixin):
             hostname=self.hostname,
             auth=self.auth
         )
-        print self.get_output(ret, self.o_format, self.delimeter)
+        print(self.get_output(ret, self.o_format, self.delimeter))
 
     def search_by_site(self, site, ipv6=False):
         url = 'network?*Site~:=%s' % site
@@ -216,7 +216,7 @@ class Network(BaseMixin):
             hostname=self.hostname,
             auth=self.auth
         )
-        print self.get_output(ret, self.o_format, self.delimeter)
+        print(self.get_output(ret, self.o_format, self.delimeter))
 
     def search(self, name=None, site=None, attribute=None, value=None, network=None, ipv6=False):
         if name is not None:
@@ -253,11 +253,11 @@ class Network(BaseMixin):
             ipv6=ipv6
         )
         if ret is None:
-            print "Unable to get Nework: {network}".format(
+            print("Unable to get Nework: {network}".format(
                 network=network
-            )
+            ))
         else:
-            print self.get_output(ret, self.o_format, self.delimeter)
+            print(self.get_output(ret, self.o_format, self.delimeter))
 
     def fixedaddresses(self, network):
         url = 'fixedaddress?network~=%s' % network
@@ -272,8 +272,8 @@ class Network(BaseMixin):
         except:
             found_records_len = 0
         if len(ret.json()) == 0:
-            print 'No Networks Found'
-        print self.get_output(ret, self.o_format, self.delimeter)
+            print('No Networks Found')
+        print(self.get_output(ret, self.o_format, self.delimeter))
 
     def delete_network(self, network, ipv6=False):
         try:
@@ -292,14 +292,14 @@ class Network(BaseMixin):
         try:
             status_code = resp.status_code
         except:
-            print "Unable to delete network: %s" % network
+            print("Unable to delete network: %s" % network)
             return False
 
         if status_code == 200:
-            print "Network Successfully Deleted: %s" % network
+            print("Network Successfully Deleted: %s" % network)
             return True
         else:
-            print "Unable to delete network: %s" % network
+            print("Unable to delete network: %s" % network)
             return False
     def create_range(
             self,
@@ -325,7 +325,7 @@ class Network(BaseMixin):
         # TODO: Print the object after a get range
         # Really should refactor this into it's own module
         if should_print is True:
-            print output
+            print(output)
 
     def create_network(
             self,
@@ -349,4 +349,4 @@ class Network(BaseMixin):
         )
         output = self.get_output(ret, self.o_format, self.delimeter)
         if should_print is True:
-            print output
+            print(output)
