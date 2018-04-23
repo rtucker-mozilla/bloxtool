@@ -102,10 +102,10 @@ def host_process_cli(config, auth, opt):
             network_block = network_block
         )
         if n.api_out.has_error:
-            print "Unable to Create Host: %s" % network
+            print("Unable to Create Host: %s" % network)
             sys.exit(2)
         else:
-            print "Host Created Successfully"
+            print("Host Created Successfully")
             n.get(name=hostname, n_type="record:host")
     if opt['delete'] is True and not opt['dhcpoption']:
         hostname = opt['<hostname>']
@@ -114,4 +114,4 @@ def host_process_cli(config, auth, opt):
                 hostname,
             )
             if ret is False:
-                print "Unable to delete host"
+                print("Unable to delete host")

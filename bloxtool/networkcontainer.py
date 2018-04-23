@@ -27,7 +27,7 @@ class NetworkContainer(BaseMixin):
         if should_return:
             return ret
         else:
-            print self.get_output(ret, self.o_format, self.delimeter)
+            print(self.get_output(ret, self.o_format, self.delimeter))
 
     def create_option(self, network, option_name, option_value):
         net_obj = self.search_by_ipv4addr(network, should_return=True, network_url=True)
@@ -35,7 +35,7 @@ class NetworkContainer(BaseMixin):
         try:
             url = net_obj.json()[0]['_ref']
         except (IndexError, KeyError):
-            print "Unable to find fixed address by ip"
+            print("Unable to find fixed address by ip")
             sys.exit(2)
         data = {}
         existing_options = self.make_request(
@@ -62,17 +62,17 @@ class NetworkContainer(BaseMixin):
                 hostname=self.hostname,
                 auth=self.auth
             )
-        except Exception, e:
+        except Exception as e:
             pass
         try:
             if ret_obj.status_code == 200:
-                print "Successfully created network container option"
+                print("Successfully created network container option")
             else:
                 import pdb; pdb.set_trace()
-                print "Unable to create network container option"
-                print ret_obj.json()['text']
-        except Exception, e:
-            print "Unable to create network container option"
+                print("Unable to create network container option")
+                print(ret_obj.json()['text'])
+        except Exception as e:
+            print("Unable to create network container option")
             sys.exit(2)
 
     def list_networkcontainers(self):
@@ -83,7 +83,7 @@ class NetworkContainer(BaseMixin):
             hostname=self.hostname,
             auth=self.auth
         )
-        print self.get_output(ret, self.o_format, self.delimeter)
+        print(self.get_output(ret, self.o_format, self.delimeter))
 
     def search(self, name=None, site=None):
         if name is not None:
@@ -108,14 +108,14 @@ class NetworkContainer(BaseMixin):
         try:
             status_code = resp.status_code
         except:
-            print "Unable to delete network container: %s" % network
+            print("Unable to delete network container: %s" % network)
             return False
 
         if status_code == 200:
-            print "Network Container Successfully Deleted: %s" % network
+            print("Network Container Successfully Deleted: %s" % network)
             return True
         else:
-            print "Unable to delete network container: %s" % network
+            print("Unable to delete network container: %s" % network)
             return False
 
     def search_by_network_cidr(self, network):
@@ -142,11 +142,11 @@ class NetworkContainer(BaseMixin):
             network=network,
         )
         if ret is None:
-            print "Unable to get NeworkContainer: {network}".format(
+            print("Unable to get NeworkContainer: {network}".format(
                 network=network
-            )
+            ))
         else:
-            print self.get_output(ret, self.o_format, self.delimeter)
+            print(self.get_output(ret, self.o_format, self.delimeter))
 
     def delete_networkcontainer(self, network):
         try:
@@ -165,14 +165,14 @@ class NetworkContainer(BaseMixin):
         try:
             status_code = resp.status_code
         except:
-            print "Unable to delete network container: %s" % network
+            print("Unable to delete network container: %s" % network)
             return False
 
         if status_code == 200:
-            print "Network Container Successfully Deleted: %s" % network
+            print("Network Container Successfully Deleted: %s" % network)
             return True
         else:
-            print "Unable to delete network container: %s" % network
+            print("Unable to delete network container: %s" % network)
             return False
 
     def create_networkcontainer(
@@ -193,4 +193,4 @@ class NetworkContainer(BaseMixin):
         )
         output = self.get_output(ret, self.o_format, self.delimeter)
         if should_print is True:
-            print output
+            print(output)

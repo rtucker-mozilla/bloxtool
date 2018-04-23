@@ -95,10 +95,10 @@ def network_process_cli(config, auth, opt):
                 members=members,
             )
             if n.api_out.has_error:
-                print "Unable to Create Network: %s" % network
+                print("Unable to Create Network: %s" % network)
                 sys.exit(2)
             else:
-                print "Network Created Successfully"
+                print("Network Created Successfully")
                 n.get(network)
         elif opt['range'] is True:
             start = opt['<start>']
@@ -131,4 +131,4 @@ def network_process_cli(config, auth, opt):
                 network,
             )
             if ret is False:
-                print "Unable to delete network"
+                print("Unable to delete network")

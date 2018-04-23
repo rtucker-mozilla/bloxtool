@@ -32,7 +32,7 @@ class BaseMixin(object):
         self.api_out = APIOutput(ret, o_format=o_format, delimeter=delimeter)
         has_error, error_text = self.api_out.process_resp()
         if has_error is True:
-            print error_text
+            print(error_text)
             sys.exit(2)
         formatted_text = self.api_out.format_text()
         return formatted_text
@@ -57,7 +57,7 @@ class BaseMixin(object):
                 url,
                 headers=headers,
                 auth=auth,
-                verify=False
+                verify=True
             )
         elif request_type == 'update'\
                 or request_type == 'put':
@@ -66,7 +66,7 @@ class BaseMixin(object):
                     headers=headers,
                     auth=auth,
                     data=data,
-                    verify=False
+                    verify=True
                 )
         elif request_type == 'create'\
                 or request_type == 'post':
@@ -75,13 +75,13 @@ class BaseMixin(object):
                     headers=headers,
                     auth=auth,
                     data=data,
-                    verify=False
+                    verify=True
                 )
         elif request_type == 'delete':
             resp = requests.delete(
                 url,
                 headers=headers,
                 auth=auth,
-                verify=False
+                verify=True
             )
         return resp

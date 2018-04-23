@@ -17,12 +17,12 @@ class FixedAddress(BaseMixin):
         )
         if should_return is True:
             return ret
-        print self.get_output(
+        print(self.get_output(
             ret,
             o_format,
             self.delimeter,
             should_return=False
-        )
+        ))
 
     def search_by_ipv4addr(self, ipv4addr, should_return=False, fields=[]):
         default_fields = "mac,ipv4addr"
@@ -49,7 +49,7 @@ class FixedAddress(BaseMixin):
         )
         if should_return is True:
             return ret
-        print self.get_output(ret, self.o_format, self.delimeter)
+        print(self.get_output(ret, self.o_format, self.delimeter))
 
     def create_option(
         self,
@@ -61,7 +61,7 @@ class FixedAddress(BaseMixin):
         try:
             url = net_obj.json()[0]['_ref']
         except (IndexError, KeyError):
-            print "Unable to find fixed address by ip"
+            print("Unable to find fixed address by ip")
             sys.exit(2)
         data = {}
         options = []
@@ -79,12 +79,12 @@ class FixedAddress(BaseMixin):
         )
         try:
             if ret_obj.status_code == 200:
-                print "Successfully created dhcp option"
+                print("Successfully created dhcp option")
             else:
-                print "Unable to create dhcp option"
-                print ret_obj.json()['text']
-        except Exception, e:
-            print "Unable to create dhcp option"
+                print("Unable to create dhcp option")
+                print(ret_obj.json()['text'])
+        except Exception as e:
+            print("Unable to create dhcp option")
             sys.exit(2)
 
     def delete_option(
@@ -97,7 +97,7 @@ class FixedAddress(BaseMixin):
         try:
             url = net_obj.json()[0]['_ref']
         except (IndexError, KeyError):
-            print "Unable to find fixed address by ip"
+            print("Unable to find fixed address by ip")
             sys.exit(2)
         try:
             net_obj_options = net_obj.json()[0]['options']
@@ -120,12 +120,12 @@ class FixedAddress(BaseMixin):
         )
         try:
             if ret_obj.status_code == 200:
-                print "Successfully deleted dhcp option"
+                print("Successfully deleted dhcp option")
             else:
-                print "Unable to delete dhcp option"
-                print ret_obj.json()['text']
-        except Exception, e:
-            print "Unable to delete dhcp option"
+                print("Unable to delete dhcp option")
+                print(ret_obj.json()['text'])
+        except Exception as e:
+            print("Unable to delete dhcp option")
             sys.exit(2)
 
     def create_fixed_address(
@@ -150,12 +150,12 @@ class FixedAddress(BaseMixin):
         )
         output = self.get_output(ret, self.o_format, self.delimeter)
         if should_print is True:
-            print "Fixed Address Successfully Created"
-            print "name: {name} mac: {mac} ipv4addr: {ipv4addr}".format(
+            print("Fixed Address Successfully Created")
+            print("name: {name} mac: {mac} ipv4addr: {ipv4addr}".format(
                 name=name,
                 mac=mac,
                 ipv4addr=ipv4addr
-            )
+            ))
 
     def delete_fixed_address(
         self,
@@ -186,4 +186,4 @@ class FixedAddress(BaseMixin):
                 auth=self.auth
             )
             if should_print is True:
-                print "Fixed Address Successfully Deleted"
+                print("Fixed Address Successfully Deleted")

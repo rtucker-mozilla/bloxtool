@@ -1,4 +1,4 @@
-import ConfigParser
+import configparser 
 import os
 
 
@@ -12,28 +12,28 @@ class ConfigObject(object):
         try:
             self.host = config_object.get(ini_section, 'host')
         except:
-            print 'host not in ini file'
+            print('host not in ini file')
 
         try:
             self.username = config_object.get(ini_section, 'username')
         except:
-            print 'username not in ini file'
+            print('username not in ini file')
 
         try:
             self.password = config_object.get(ini_section, 'password')
         except:
-            print 'password not in ini file'
+            print('password not in ini file')
 
-        try:
-            self.ssl_verify = config_object.get(ini_section, 'ssl_verify')
-            if self.ssl_verify.upper() == 'FALSE':
-                self.ssl_verify = False
-        except:
-            self.ssl_verify = True
+        # try:
+        #     self.ssl_verify = config_object.get(ini_section, 'ssl_verify')
+        #     if self.ssl_verify.upper() == 'FALSE':
+        #         self.ssl_verify = False
+        # except:
+        self.ssl_verify = True
 
 
 def read_config_object(filepath):
-    read_config = ConfigParser.RawConfigParser()
+    read_config = configparser.RawConfigParser()
     read_config.read(filepath)
     return read_config
 
