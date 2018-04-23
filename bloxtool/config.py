@@ -1,4 +1,4 @@
-import ConfigParser
+import configparser 
 import os
 
 
@@ -33,7 +33,7 @@ class ConfigObject(object):
 
 
 def read_config_object(filepath):
-    read_config = ConfigParser.RawConfigParser()
+    read_config = configparser.RawConfigParser()
     read_config.read(filepath)
     return read_config
 
