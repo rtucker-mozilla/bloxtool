@@ -329,7 +329,7 @@ class Host(BaseMixin):
             else:
                 print("Unable to create network dhcpoption")
                 print(ret_obj.json()['text'])
-        except Exception, e:
+        except Exception as e:
             print("Unable to create network extattr")
             sys.exit(2)
 
