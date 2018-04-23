@@ -35,7 +35,7 @@ def zoneauth_process_cli(config, auth, opt):
         grid_primary = opt['--grid-primary']
         ns_group = opt['--ns-group']
         if grid_primary is None and ns_group is None:
-            print "--ns-group or --grid-primary is required"
+            print("--ns-group or --grid-primary is required")
             sys.exit(2)
         z.create_zoneauth(
             zone,
