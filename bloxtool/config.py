@@ -24,12 +24,12 @@ class ConfigObject(object):
         except:
             print('password not in ini file')
 
-        try:
-            self.ssl_verify = config_object.get(ini_section, 'ssl_verify')
-            if self.ssl_verify.upper() == 'FALSE':
-                self.ssl_verify = False
-        except:
-            self.ssl_verify = True
+        # try:
+        #     self.ssl_verify = config_object.get(ini_section, 'ssl_verify')
+        #     if self.ssl_verify.upper() == 'FALSE':
+        #         self.ssl_verify = False
+        # except:
+        self.ssl_verify = True
 
 
 def read_config_object(filepath):

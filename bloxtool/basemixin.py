@@ -57,7 +57,7 @@ class BaseMixin(object):
                 url,
                 headers=headers,
                 auth=auth,
-                verify=False
+                verify=True
             )
         elif request_type == 'update'\
                 or request_type == 'put':
@@ -66,7 +66,7 @@ class BaseMixin(object):
                     headers=headers,
                     auth=auth,
                     data=data,
-                    verify=False
+                    verify=True
                 )
         elif request_type == 'create'\
                 or request_type == 'post':
@@ -75,13 +75,13 @@ class BaseMixin(object):
                     headers=headers,
                     auth=auth,
                     data=data,
-                    verify=False
+                    verify=True
                 )
         elif request_type == 'delete':
             resp = requests.delete(
                 url,
                 headers=headers,
                 auth=auth,
-                verify=False
+                verify=True
             )
         return resp
