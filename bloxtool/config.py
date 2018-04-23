@@ -12,17 +12,17 @@ class ConfigObject(object):
         try:
             self.host = config_object.get(ini_section, 'host')
         except:
-            print 'host not in ini file'
+            print('host not in ini file')
 
         try:
             self.username = config_object.get(ini_section, 'username')
         except:
-            print 'username not in ini file'
+            print('username not in ini file')
 
         try:
             self.password = config_object.get(ini_section, 'password')
         except:
-            print 'password not in ini file'
+            print('password not in ini file')
 
         try:
             self.ssl_verify = config_object.get(ini_section, 'ssl_verify')

@@ -32,4 +32,4 @@ class GlobalSearch(BaseMixin):
             hostname=self.hostname,
             auth=self.auth
         )
-        print self.get_output(ret, self.o_format, self.delimeter)
+        print(self.get_output(ret, self.o_format, self.delimeter))
