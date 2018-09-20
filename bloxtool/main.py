@@ -65,6 +65,11 @@ def main():
         config_path = os.path.join(os.environ["HOME"], ".bloxtool.cfg")
     config = get_config(config_path)
 
+    if config == None:
+        print "You must create a configuration file in ~/.bloxtool.cfg or specify its location with --config."
+        sys.exit(2)
+
+
     try:
         if config.ssl_verify is False:
             import requests
